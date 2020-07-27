@@ -2,8 +2,6 @@
 
 # Create VK Mini App [![npm][npm]][npm-url] [![deps][deps]][deps-url]
 
-## How to install
-
 ### Create VK Mini App with gh-pages deploy
 
 `npx @vkontakte/create-vk-mini-app <app-directory-name>`
