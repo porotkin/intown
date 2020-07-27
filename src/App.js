@@ -36,6 +36,7 @@ const App = () => {
 		<View activePanel={activePanel} popout={popout}>
 			<Home id='home' fetchedUser={fetchedUser} go={go} />
 			<Persik id='persik' go={go} />
+			<ScreenSpinner size={small} />
 		</View>
 	);
 }
