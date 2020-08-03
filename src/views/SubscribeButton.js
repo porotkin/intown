@@ -1,22 +1,26 @@
 import React from 'react';
-import {Div, Header, Group, Button, SimpleCell, Avatar} from '@vkontakte/vkui';
+import {Div, Group, Button} from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 
 class SubscribeButton extends React.Component {
     constructor (props) {
         super(props);
-        this.state = {on :'primary'};
+        this.state = {mode: 'primary', sub: "Подписаться"};
     }
-    type(e){
-
-        this.setState({: 'secondary'})
-
+    changeButtonMode = () => {
+        if (this.state.mode === "primary") {
+            this.setState({mode: 'secondary'})
+            this.setState({sub: 'Отписаться'})
+        } else {
+            this.setState({mode: 'primary'})
+            this.setState({sub: 'Подписаться'})
+        }
     }
     render () {
         return (
             <Group>
                 <Div>
-                    <Button mode={this.props.mode} onClick={this.type} >Подписаться</Button>
+                    <Button mode={this.state.mode} onClick={this.changeButtonMode}>{this.state.sub}</Button>
                 </Div>
             </Group>
         )

@@ -15,7 +15,6 @@ class Main extends React.Component {
     }
 
     onStoryChange (e) {
-
         this.setState({ activeStory: e.currentTarget.dataset.story })
     }
 
@@ -40,13 +39,13 @@ class Main extends React.Component {
             }>
                 <View id="Subs" activePanel="Subs">
                     <Panel id="Subs">
-                        <PanelHeader>Подписки</PanelHeader>
+                        <PanelHeader separator={false}>Подписки</PanelHeader>
                         <Friends />
                     </Panel>
                 </View>
                 <View id="Geo" activePanel="Geo">
                     <Panel id="Geo">
-                        <PanelHeader>Геолокация</PanelHeader>
+                        <PanelHeader separator={false}>Геолокация</PanelHeader>
                     </Panel>
                 </View>
             </Epic>

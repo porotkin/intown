@@ -1,13 +1,47 @@
 import React from 'react';
-import { Group, Header, SimpleCell,Avatar } from '@vkontakte/vkui';
+import {Group, Header, SimpleCell, Avatar} from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
-import Icon28MessageOutline from '@vkontakte/icons/dist/28/message_outline';
 import SubscribeButton from "./SubscribeButton";
+import bridge from '@vkontakte/vk-bridge';
+import {VKMiniAppAPI} from "@vkontakte/vk-mini-apps-api";
 
 class Friends extends React.Component {
     constructor (props) {
         super(props);
+        this.state = {
+          friends: null
+        };
+        bridge
+            .send('VKWebAppGetEmail')
+            .then(data => {
+                // Handling received data
+                console.log(data.email);
+            })
+            .catch(error => {
+                // Handling an error
+                console.log(error)
+            });
+        bridge.subscribe(({ detail: { type, data }}) => {
+            if (type === 'VKWebAppGetFriendsResult') {
+                this.setState({friends: data.users.id})
+            }
+        });
+        this.getFriends();
+        // Creating API instance
+        const api = new VKMiniAppAPI();
+
+        // Initializing app
+        api.initApp();
+
+        // Using methods
+        api.getUserInfo().then(userInfo => {
+            console.log(userInfo.id);
+        });
     }
+
+    getFriends = async () => {
+        await bridge.send("VKWebAppGetFriends", {});
+    };
 
     render () {
         return (

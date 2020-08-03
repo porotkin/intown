@@ -9,6 +9,7 @@
     "predeploy": "npm run build",
     "deploy": "vk-miniapps-deploy"
   },
+  "proxy": "http://localhost:8080",
   "keywords": [],
   "author": "",
   "license": "MIT",
@@ -20,7 +21,9 @@
   "dependencies": {
     "@vkontakte/icons": "^1.18.2",
     "@vkontakte/vk-bridge": "^2.2.4",
+    "@vkontakte/vk-mini-apps-api": "^0.6.5",
     "@vkontakte/vk-miniapps-deploy": "0.0.17",
+    "@vkontakte/vk-tunnel": "0.0.13",
     "@vkontakte/vkui": "^3.5.0",
     "babel-eslint": "^10.1.0",
     "chalk": "^2.4.2",
