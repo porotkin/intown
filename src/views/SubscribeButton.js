@@ -5,22 +5,22 @@ import '@vkontakte/vkui/dist/vkui.css';
 class SubscribeButton extends React.Component {
     constructor (props) {
         super(props);
-        this.state = {mode: 'primary', sub: "Подписаться"};
+        this.state = this.props.subscribed ? {on: 'secondary', text: "Отписаться", subscribed: true} : {on: 'primary', text: "Подписаться", subscribed: false};
     }
-    changeButtonMode = () => {
-        if (this.state.mode === "primary") {
-            this.setState({mode: 'secondary'})
-            this.setState({sub: 'Отписаться'})
+
+    subscribeToggle = () => {
+        if (!this.state.subscribed) {
+            this.setState({on: 'secondary', text: 'Отписаться', subscribed: true})
         } else {
-            this.setState({mode: 'primary'})
-            this.setState({sub: 'Подписаться'})
+            this.setState({on: 'primary', text: 'Подписаться', subscribed: false})
         }
     }
+
     render () {
         return (
             <Group>
                 <Div>
-                    <Button mode={this.state.mode} onClick={this.changeButtonMode}>{this.state.sub}</Button>
+                    <Button mode={this.state.on} onClick={this.subscribeToggle}>{this.state.text}</Button>
                 </Div>
             </Group>
         )

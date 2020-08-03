@@ -1,17 +1,32 @@
 import React from 'react';
-import { View, Panel, PanelHeader, TabbarItem, Epic, Tabbar } from '@vkontakte/vkui';
+import {Epic, Panel, PanelHeader, Tabbar, TabbarItem, View} from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import Icon28PlayRectangleStackOutline from '@vkontakte/icons/dist/28/play_rectangle_stack_outline';
 import Icon28LocationOutline from '@vkontakte/icons/dist/28/location_outline';
-import Friends from './Friends'
+import bridge from "@vkontakte/vk-bridge";
+import Group from "@vkontakte/vkui/dist/components/Group/Group";
+import Friends from "./Friends";
 
 class Main extends React.Component {
     constructor (props) {
         super(props);
+
         this.state = {
             activeStory: 'Subs',
+            friends: null,
         };
         this.onStoryChange = this.onStoryChange.bind(this);
+        bridge.subscribe(({ detail: { type, data }}) => {
+            if (type === 'VKWebAppUpdateConfig') {
+                const schemeAttribute = document.createAttribute('scheme');
+                schemeAttribute.value = data.scheme ? data.scheme : 'client_light';
+                document.body.attributes.setNamedItem(schemeAttribute);
+            }
+        });
+        async function fetchData() {
+            return await bridge.send('VKWebAppGetUserInfo');
+        }
+        fetchData();
     }
 
     onStoryChange (e) {
@@ -19,6 +34,7 @@ class Main extends React.Component {
     }
 
     render () {
+
         return (
             <Epic activeStory={this.state.activeStory} tabbar={
                 <Tabbar>
@@ -40,7 +56,9 @@ class Main extends React.Component {
                 <View id="Subs" activePanel="Subs">
                     <Panel id="Subs">
                         <PanelHeader separator={false}>Подписки</PanelHeader>
-                        <Friends />
+                        <Group>
+                            <Friends/>
+                        </Group>
                     </Panel>
                 </View>
                 <View id="Geo" activePanel="Geo">

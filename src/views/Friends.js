@@ -1,54 +1,50 @@
 import React from 'react';
-import {Group, Header, SimpleCell, Avatar} from '@vkontakte/vkui';
+import {Group, Header, Avatar} from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import SubscribeButton from "./SubscribeButton";
 import bridge from '@vkontakte/vk-bridge';
-import {VKMiniAppAPI} from "@vkontakte/vk-mini-apps-api";
+import SimpleCell from "@vkontakte/vkui/dist/components/SimpleCell/SimpleCell";
 
 class Friends extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
+          access_token: null,
           friends: null
         };
-        bridge
-            .send('VKWebAppGetEmail')
+        bridge.send("VKWebAppGetAuthToken", {"app_id": 7550756, "scope": "friends"})
             .then(data => {
-                // Handling received data
-                console.log(data.email);
-            })
-            .catch(error => {
-                // Handling an error
-                console.log(error)
+                this.setState({
+                    access_token: data.access_token
+                })
+                this.getFriends()
             });
-        bridge.subscribe(({ detail: { type, data }}) => {
-            if (type === 'VKWebAppGetFriendsResult') {
-                this.setState({friends: data.users.id})
-            }
-        });
-        this.getFriends();
-        // Creating API instance
-        const api = new VKMiniAppAPI();
-
-        // Initializing app
-        api.initApp();
-
-        // Using methods
-        api.getUserInfo().then(userInfo => {
-            console.log(userInfo.id);
-        });
     }
 
     getFriends = async () => {
-        await bridge.send("VKWebAppGetFriends", {});
-    };
+        await bridge
+            .send('VKWebAppCallAPIMethod', {method: "friends.get", request_id: "32test", params: {
+                    fields: "id, photo_50", order: "name", access_token: this.state.access_token
+                }})
+            .then(data => {
+                this.setState({
+                    friends: data.response.items
+                });
+                console.log(data)
+            })
+            .catch(error => {
+                // Handling an error
+                console.log(error);
+            });
+    }
 
     render () {
         return (
             <Group>
                 <Header mode="secondary">Список друзей</Header>
-                <SimpleCell before={<Avatar size={48} src='https://sun9-33.userapi.com/wf7AIU5YwDRMwxONpXdmLvOhMAqeYUN5WS0KvA/rsHYbQ5u9wM.jpg' />} after={<SubscribeButton />} description="Команда ВКонтакте">Michael Porotkin</SimpleCell>
-                <SimpleCell before={<Avatar size={48} src='https://vk.com/images/camera_200.png?ava=1' />} after={<SubscribeButton />} description="Дада">Artem Buslaev</SimpleCell>
+                {this.state.friends ? this.state.friends.map((friend) => {
+                    return <SimpleCell before={<Avatar size={48} src={friend.photo_50}/>} after={<SubscribeButton subscribed={false}/>} description={friend.id}>{friend.first_name + ' ' + friend.last_name}</SimpleCell>
+                }) : <SimpleCell>Loading</SimpleCell>}
             </Group>
         )
     }

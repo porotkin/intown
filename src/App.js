@@ -25,7 +25,7 @@ const App = () => {
 			setUser(user);
 			setPopout(null);
 		}
-		fetchData();
+		fetchData().then();
 	}, []);
 
 	const go = e => {
