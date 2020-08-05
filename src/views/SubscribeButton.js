@@ -18,11 +18,11 @@ class SubscribeButton extends React.Component {
 
     render () {
         return (
-            <Group>
-                <Div>
+
+                <Div >
                     <Button mode={this.state.on} onClick={this.subscribeToggle}>{this.state.text}</Button>
                 </Div>
-            </Group>
+
         )
     }
 }

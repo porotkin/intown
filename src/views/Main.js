@@ -6,6 +6,7 @@ import Icon28LocationOutline from '@vkontakte/icons/dist/28/location_outline';
 import bridge from "@vkontakte/vk-bridge";
 import Group from "@vkontakte/vkui/dist/components/Group/Group";
 import Friends from "./Friends";
+import Gmap from "./Gmap";
 
 class Main extends React.Component {
     constructor (props) {
@@ -16,17 +17,7 @@ class Main extends React.Component {
             friends: null,
         };
         this.onStoryChange = this.onStoryChange.bind(this);
-        bridge.subscribe(({ detail: { type, data }}) => {
-            if (type === 'VKWebAppUpdateConfig') {
-                const schemeAttribute = document.createAttribute('scheme');
-                schemeAttribute.value = data.scheme ? data.scheme : 'client_light';
-                document.body.attributes.setNamedItem(schemeAttribute);
-            }
-        });
-        async function fetchData() {
-            return await bridge.send('VKWebAppGetUserInfo');
-        }
-        fetchData();
+
     }
 
     onStoryChange (e) {
@@ -56,14 +47,13 @@ class Main extends React.Component {
                 <View id="Subs" activePanel="Subs">
                     <Panel id="Subs">
                         <PanelHeader separator={false}>Подписки</PanelHeader>
-                        <Group>
                             <Friends/>
-                        </Group>
                     </Panel>
                 </View>
-                <View id="Geo" activePanel="Geo">
+                <View id="Geo" activePanel="Geo" >
                     <Panel id="Geo">
                         <PanelHeader separator={false}>Геолокация</PanelHeader>
+                        <Gmap />
                     </Panel>
                 </View>
             </Epic>
