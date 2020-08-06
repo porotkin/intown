@@ -10,7 +10,7 @@ class GeoButton extends React.Component {
     render () {
         return (
                 <Div style={{textAlign: 'center', marginTop: '3%'}}>
-                    <Button mode="commerce" size='xl'>Поделиться геопозицией</Button>
+                    <Button mode="commerce" size='xl' onClick={this.props.onClick}>Поделиться геопозицией</Button>
                 </Div>
         )
     }
