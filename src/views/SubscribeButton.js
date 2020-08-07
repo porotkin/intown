@@ -14,30 +14,24 @@ class SubscribeButton extends React.Component {
     subscribeToggle = () => {
         if (!this.state.subscribed) {
             this.setState({on: 'secondary', text: 'Отписаться', subscribed: true})
-            fetch(Constants.SERVER_API_ADDRESS + "user/remove", {
-                mode: "cors",
-                method: "DELETE",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: {
-                    id: this.props.user_id,
-                    subscriber: this.props.friend_id,
-                }
-            });
-        } else {
-            this.setState({on: 'primary', text: 'Подписаться', subscribed: false})
             fetch(Constants.SERVER_API_ADDRESS + "user/add", {
                 mode: "cors",
                 method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
                 body: {
                     id: this.props.user_id,
                     subscriber: this.props.friend_id,
                 }
-            });
+            }).then();
+        } else {
+            this.setState({on: 'primary', text: 'Подписаться', subscribed: false})
+            fetch(Constants.SERVER_API_ADDRESS + "user/remove", {
+                mode: "cors",
+                method: "DELETE",
+                body: {
+                    id: this.props.user_id,
+                    subscriber: this.props.friend_id,
+                }
+            }).then();
         }
     }
 

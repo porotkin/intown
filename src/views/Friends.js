@@ -60,12 +60,31 @@ class Friends extends React.Component {
             });
     }
 
+    subscribedToUser(id) {
+        if (this.state.subscribers) {
+            for (let user in this.state.subscribers) {
+                if (user === id) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     render () {
         return (
             <Group>
                 <Header mode="secondary">Список друзей</Header>
                 {this.state.friends ? this.state.friends.map((friend) => {
-                    return <SimpleCell before={<Avatar size={48} src={friend.photo_50}/>} after={<SubscribeButton user_id={this.state.user_id} friend_id={friend.id} subscribed={ this.state.subscribers ? this.state.subscribers.includes(friend.id) : false } />} description={friend.id}>{friend.first_name + ' ' + friend.last_name}</SimpleCell>
+                    return <SimpleCell
+                        before={<Avatar size={48} src={friend.photo_50}/>}
+                        after={<SubscribeButton
+                            user_id={this.state.user_id}
+                            friend_id={friend.id}
+                            subscribed={ this.subscribedToUser(friend.id) }
+                        />}
+                        description={friend.id}
+                    >{friend.first_name + ' ' + friend.last_name}</SimpleCell>
                 }) : <SimpleCell>Loading</SimpleCell>}
             </Group>
         )
