@@ -3,8 +3,6 @@ import {Epic, Panel, PanelHeader, Tabbar, TabbarItem, View} from '@vkontakte/vku
 import '@vkontakte/vkui/dist/vkui.css';
 import Icon28PlayRectangleStackOutline from '@vkontakte/icons/dist/28/play_rectangle_stack_outline';
 import Icon28LocationOutline from '@vkontakte/icons/dist/28/location_outline';
-import bridge from "@vkontakte/vk-bridge";
-import Group from "@vkontakte/vkui/dist/components/Group/Group";
 import Friends from "./Friends";
 import Gmap from "./Gmap";
 

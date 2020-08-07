@@ -24,7 +24,8 @@ class Friends extends React.Component {
     getFriends = async () => {
         await bridge
             .send('VKWebAppCallAPIMethod', {method: "friends.get", request_id: "32test", params: {
-                    fields: "id, photo_50", order: "name", access_token: this.state.access_token
+                    fields: "id, photo_50", order: "name", access_token: this.state.access_token,
+                    v: "5.122",
                 }})
             .then(data => {
                 this.setState({

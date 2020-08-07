@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.js": "/intown/static/js/main.ba2195d4.chunk.js",
-    "main.js.map": "/intown/static/js/main.ba2195d4.chunk.js.map",
+    "main.js": "/intown/static/js/main.b32e7a4e.chunk.js",
+    "main.js.map": "/intown/static/js/main.b32e7a4e.chunk.js.map",
     "runtime-main.js": "/intown/static/js/runtime-main.da77f048.js",
     "runtime-main.js.map": "/intown/static/js/runtime-main.da77f048.js.map",
     "static/css/2.1e562f28.chunk.css": "/intown/static/css/2.1e562f28.chunk.css",
-    "static/js/2.d8c8e0f2.chunk.js": "/intown/static/js/2.d8c8e0f2.chunk.js",
-    "static/js/2.d8c8e0f2.chunk.js.map": "/intown/static/js/2.d8c8e0f2.chunk.js.map",
+    "static/js/2.5eed4cb6.chunk.js": "/intown/static/js/2.5eed4cb6.chunk.js",
+    "static/js/2.5eed4cb6.chunk.js.map": "/intown/static/js/2.5eed4cb6.chunk.js.map",
     "index.html": "/intown/index.html",
-    "precache-manifest.ac963df8dc54073ba17a959c9271b264.js": "/intown/precache-manifest.ac963df8dc54073ba17a959c9271b264.js",
+    "precache-manifest.92bbff145aef25e5b5164d29c3b8e89e.js": "/intown/precache-manifest.92bbff145aef25e5b5164d29c3b8e89e.js",
     "service-worker.js": "/intown/service-worker.js",
     "static/css/2.1e562f28.chunk.css.map": "/intown/static/css/2.1e562f28.chunk.css.map",
-    "static/js/2.d8c8e0f2.chunk.js.LICENSE.txt": "/intown/static/js/2.d8c8e0f2.chunk.js.LICENSE.txt"
+    "static/js/2.5eed4cb6.chunk.js.LICENSE.txt": "/intown/static/js/2.5eed4cb6.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.da77f048.js",
     "static/css/2.1e562f28.chunk.css",
-    "static/js/2.d8c8e0f2.chunk.js",
-    "static/js/main.ba2195d4.chunk.js"
+    "static/js/2.5eed4cb6.chunk.js",
+    "static/js/main.b32e7a4e.chunk.js"
   ]
 }

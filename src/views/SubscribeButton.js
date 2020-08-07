@@ -1,11 +1,13 @@
 import React from 'react';
-import {Div, Group, Button} from '@vkontakte/vkui';
+import {Div, Button} from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 
 class SubscribeButton extends React.Component {
     constructor (props) {
         super(props);
-        this.state = this.props.subscribed ? {on: 'secondary', text: "Отписаться", subscribed: true} : {on: 'primary', text: "Подписаться", subscribed: false};
+        this.state = this.props.subscribed
+            ? {on: 'secondary', text: "Отписаться", subscribed: true}
+            : {on: 'primary', text: "Подписаться", subscribed: false};
     }
 
     subscribeToggle = () => {
@@ -18,11 +20,9 @@ class SubscribeButton extends React.Component {
 
     render () {
         return (
-
                 <Div >
                     <Button mode={this.state.on} onClick={this.subscribeToggle}>{this.state.text}</Button>
                 </Div>
-
         )
     }
 }
