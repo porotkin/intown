@@ -13,6 +13,7 @@ class SubscribeButton extends React.Component {
     subscribeToggle = () => {
         if (!this.state.subscribed) {
             this.setState({on: 'secondary', text: 'Отписаться', subscribed: true})
+            fetch()
         } else {
             this.setState({on: 'primary', text: 'Подписаться', subscribed: false})
         }
