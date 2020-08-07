@@ -4,7 +4,7 @@ import '@vkontakte/vkui/dist/vkui.css';
 import SubscribeButton from "./SubscribeButton";
 import bridge from '@vkontakte/vk-bridge';
 import SimpleCell from "@vkontakte/vkui/dist/components/SimpleCell/SimpleCell";
-import Constants from "../../constants";
+import Constants from "../constants";
 
 class Friends extends React.Component {
     constructor (props) {
@@ -26,7 +26,7 @@ class Friends extends React.Component {
                     access_token: data.access_token
                 })
                 this.getFriends()
-                fetch(Constants.SERVER_API_ADDRESS + "/user/" + this.state.user_id, {
+                fetch(Constants.SERVER_API_ADDRESS + "user/" + this.state.user_id, {
                     mode: "cors",
                     method: "GET",
                     headers: {
@@ -65,7 +65,7 @@ class Friends extends React.Component {
             <Group>
                 <Header mode="secondary">Список друзей</Header>
                 {this.state.friends ? this.state.friends.map((friend) => {
-                    return <SimpleCell before={<Avatar size={48} src={friend.photo_50}/>} after={<SubscribeButton subscribed={ this.state.subscribers.includes(friend.id) } />} description={friend.id}>{friend.first_name + ' ' + friend.last_name}</SimpleCell>
+                    return <SimpleCell before={<Avatar size={48} src={friend.photo_50}/>} after={<SubscribeButton subscribed={ this.state.subscribers ? this.state.subscribers.includes(friend.id) : false } />} description={friend.id}>{friend.first_name + ' ' + friend.last_name}</SimpleCell>
                 }) : <SimpleCell>Loading</SimpleCell>}
             </Group>
         )
