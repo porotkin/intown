@@ -17,20 +17,26 @@ class SubscribeButton extends React.Component {
             fetch(Constants.SERVER_API_ADDRESS + "user/add", {
                 mode: "cors",
                 method: "POST",
-                body: {
+                headers: {
+                  "Content-type": "application/json"
+                },
+                body: JSON.stringify({
                     id: this.props.user_id,
                     subscriber: this.props.friend_id,
-                }
+                })
             }).then();
         } else {
             this.setState({on: 'primary', text: 'Подписаться', subscribed: false})
             fetch(Constants.SERVER_API_ADDRESS + "user/remove", {
                 mode: "cors",
                 method: "DELETE",
-                body: {
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify({
                     id: this.props.user_id,
                     subscriber: this.props.friend_id,
-                }
+                })
             }).then();
         }
     }

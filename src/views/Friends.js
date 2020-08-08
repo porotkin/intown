@@ -19,26 +19,29 @@ class Friends extends React.Component {
             this.setState({
                 user_id: data.id
             });
+            fetch(Constants.SERVER_API_ADDRESS + "user/" + this.state.user_id, {
+                mode: "cors",
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            }).then((response) => {
+                response.json().then((data) => {
+                    this.setState({
+                        subscribers: data.subs
+                    });
+                    console.log(data)
+                });
+            }, (reject) => {
+                console.log(reject)
+            });
         })
         bridge.send("VKWebAppGetAuthToken", {"app_id": 7550756, "scope": "friends"})
             .then(data => {
                 this.setState({
                     access_token: data.access_token
                 })
-                this.getFriends()
-                fetch(Constants.SERVER_API_ADDRESS + "user/" + this.state.user_id, {
-                    mode: "cors",
-                    method: "GET",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                }).then((response) => {
-                    response.json().then((data) => {
-                        this.setState({
-                            subscribers: data
-                        });
-                    });
-                });
+                this.getFriends().then();
             });
     }
 
@@ -52,23 +55,11 @@ class Friends extends React.Component {
                 this.setState({
                     friends: data.response.items
                 });
-                console.log(data)
             })
             .catch(error => {
                 // Handling an error
                 console.log(error);
             });
-    }
-
-    subscribedToUser(id) {
-        if (this.state.subscribers) {
-            for (let user in this.state.subscribers) {
-                if (user === id) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     render () {
@@ -81,7 +72,7 @@ class Friends extends React.Component {
                         after={<SubscribeButton
                             user_id={this.state.user_id}
                             friend_id={friend.id}
-                            subscribed={ this.subscribedToUser(friend.id) }
+                            subscribed={this.state.subscribers ? this.state.subscribers.includes(friend.id) : false}
                         />}
                         description={friend.id}
                     >{friend.first_name + ' ' + friend.last_name}</SimpleCell>

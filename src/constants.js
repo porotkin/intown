@@ -1,3 +1,3 @@
 export default class Constants {
-    static SERVER_API_ADDRESS = "https://bc51e15b5e75.ngrok.io/";
+    static SERVER_API_ADDRESS = "https://fa44611b89dc.ngrok.io/";
 }
