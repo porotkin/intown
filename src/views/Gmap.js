@@ -38,49 +38,52 @@ class Gmap extends React.Component {
     }
 
     sendGeoToServer = async (data) => {
+        console.log("sendGeoToServer started")
         await bridge.send('VKWebAppGetUserInfo')
             .then(userInfo => {
-                ApiConnector.addUserLocation(userInfo.id, data.lat, data.long).then();
+                console.log("got user info")
+                ApiConnector.addUserLocation(userInfo.id, data.lat, data.long);
+                console.log("user location sent")
                 ApiConnector.getSubscribers(userInfo.id).then((response) => {
-                    response.json((data) => {
-                        bridge.send('VKWebAppCallAPIMethod', {
-                            method: "users.get",
-                            request_id: "test64",
-                            params: {
-                                user_ids: data.subs,
-                                fields: "first_name, last_name",
-                                v: "5.122",
-                            }
-                        }).then((data) => {
-                            for (const user in data.response) {
-                                ApiConnector.getUserLocation(user.id).then((response) => {
-                                   response.json((location) => {
-                                       const userLocation = {
-                                           id: location.id,
-                                           name: user.first_name + ' ' + user.last_name,
-                                           date: location.date,
-                                           lat: location.lat,
-                                           lng: location.long,
-                                       }
-                                       this.friendsCoordinates.push(userLocation)
-                                   });
+                    response.json().then((data) => {
+                        console.log("got subs from backend api")
+                        bridge.send('VKWebAppGetAuthToken', {"app_id": 7550756, "scope": "users"}).then(response => {
+                            bridge.send('VKWebAppCallAPIMethod', {
+                                method: "users.get",
+                                request_id: "64test",
+                                params: {
+                                    user_ids: data.subs,
+                                    fields: "first_name, last_name",
+                                    v: "5.122",
+                                    access_token: response.access_token,
+                                }
+                            }).then((data) => {
+                                console.log(data.response)
+                                data.response.forEach(user => {
+                                    ApiConnector.getUserLocation(user.id).then((response) => {
+                                        response.json((location) => {
+                                            const userLocation = {
+                                                id: location.id,
+                                                name: user.first_name + ' ' + user.last_name,
+                                                date: location.date,
+                                                lat: location.lat,
+                                                lng: location.long,
+                                            }
+                                            this.friendsCoordinates.push(userLocation)
+                                        });
+                                    });
                                 });
-                            }
+                                this.setState({
+                                    subscribers: this.friendsCoordinates
+                                });
+                            })
                         })
                     })
-                },
-                    (reject) => {
-                        console.log(reject)
-                    });
+                });
             });
     }
 
     render () {
-        if (this.state.geoLocation)
-            this.friendsCoordinates = [
-                {name: 'Michael Porotkin', lat: this.state.geoLocation.lat-1 , lng: this.state.geoLocation.lng},
-                {name: 'Some One', lat: this.state.geoLocation.lat, lng: this.state.geoLocation.lng+1}
-        ];
         return (
             <Group style={{
                 height: '65vh', width: '95%',
@@ -92,9 +95,9 @@ class Gmap extends React.Component {
                 center={this.state.geoLocation ? this.state.geoLocation : this.props.center}
                 zoom={this.props.zoom}
             >
-                {this.state.geoLocation ? <Marker lat={this.state.geoLocation.lat} lng={this.state.geoLocation.lng} name={'Artem Buslaev'}/>:''}
-                {this.friendsCoordinates ? this.friendsCoordinates.map((friend) => {
-                    return <Marker lat={friend.lat} lng={friend.lng} name={friend.name}/>}):''}
+                {this.state.geoLocation ? <Marker lat={this.state.geoLocation.lat} lng={this.state.geoLocation.lng} name={'Вы'}/>:''}
+                {this.state.subscribers.map((friend) => {
+                    return <Marker key={friend.id} lat={friend.lat} lng={friend.lng} name={friend.name}/>})}
             </GoogleMapReact>
             <GeoButton onClick={this.getGeo}/>
             </Group>

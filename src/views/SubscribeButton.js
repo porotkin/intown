@@ -1,7 +1,6 @@
 import React from 'react';
 import {Div, Button} from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
-import Constants from "../constants";
 import ApiConnector from "../services/apiConnector";
 
 class SubscribeButton extends React.Component {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Group, Header, Avatar} from '@vkontakte/vkui';
+import {Group, Header, Avatar, Spinner} from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import SubscribeButton from "./SubscribeButton";
 import bridge from '@vkontakte/vk-bridge';
@@ -10,58 +10,50 @@ class Friends extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-          access_token: null,
           friends: null,
           user_id: null,
           subscribers: null,
         };
-        bridge.send("VKWebAppGetUserInfo", {}).then((data) => {
-            this.setState({
-                user_id: data.id
-            });
-            ApiConnector.getSubscribers(this.state.user_id).then((response) => {
-                response.json().then((data) => {
-                    this.setState({
-                        subscribers: data.subs
-                    });
-                    console.log(data)
+        bridge.send("VKWebAppGetUserInfo", {}).then((user_data) => {
+            ApiConnector.getSubscribers(user_data.id).then((response) => {
+                response.json().then((api) => {
+                    bridge.send("VKWebAppGetAuthToken", {"app_id": 7550756, "scope": "friends"})
+                        .then(data => {
+                            this.getFriends(data.access_token).then(data => {
+                                this.setState({
+                                    user_id: user_data.id,
+                                    subscribers: api.subs,
+                                    friends: data.response.items
+                                });
+                            });
+                        });
                 });
             }, (reject) => {
                 console.log(reject)
             });
         })
-        bridge.send("VKWebAppGetAuthToken", {"app_id": 7550756, "scope": "friends"})
-            .then(data => {
-                this.setState({
-                    access_token: data.access_token
-                })
-                this.getFriends().then();
-            });
     }
 
-    getFriends = async () => {
-        await bridge
-            .send('VKWebAppCallAPIMethod', {method: "friends.get", request_id: "32test", params: {
-                    fields: "id, photo_50", order: "name", access_token: this.state.access_token,
-                    v: "5.122",
-                }})
-            .then(data => {
-                this.setState({
-                    friends: data.response.items
+    getFriends = async (access_token) => {
+        return await bridge
+            .send('VKWebAppCallAPIMethod',
+                {method: "friends.get", request_id: "32test",
+                    params: {
+                        fields: "id, photo_50",
+                        order: "name",
+                        access_token: access_token,
+                        v: "5.122",
+                    }
                 });
-            })
-            .catch(error => {
-                // Handling an error
-                console.log(error);
-            });
     }
 
     render () {
         return (
             <Group>
-                <Header mode="secondary">Список друзей</Header>
+                <Header mode="secondary" popout={this.state.popout}>Список друзей</Header>
                 {this.state.friends ? this.state.friends.map((friend) => {
                     return <SimpleCell
+                        key={friend.id}
                         before={<Avatar size={48} src={friend.photo_50}/>}
                         after={<SubscribeButton
                             user_id={this.state.user_id}
@@ -70,7 +62,7 @@ class Friends extends React.Component {
                         />}
                         description={friend.id}
                     >{friend.first_name + ' ' + friend.last_name}</SimpleCell>
-                }) : <SimpleCell>Loading</SimpleCell>}
+                }) : <Spinner size="regular" style={{ marginTop: 20 }}/> }
             </Group>
         )
     }
