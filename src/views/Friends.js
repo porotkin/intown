@@ -5,6 +5,7 @@ import SubscribeButton from "./SubscribeButton";
 import bridge from '@vkontakte/vk-bridge';
 import SimpleCell from "@vkontakte/vkui/dist/components/SimpleCell/SimpleCell";
 import ApiConnector from "../services/apiConnector";
+import Constants from "../constants";
 
 class Friends extends React.Component {
     constructor (props) {
@@ -17,7 +18,7 @@ class Friends extends React.Component {
         bridge.send("VKWebAppGetUserInfo", {}).then((user_data) => {
             ApiConnector.getSubscribers(user_data.id).then((response) => {
                 response.json().then((api) => {
-                    bridge.send("VKWebAppGetAuthToken", {"app_id": 7550756, "scope": "friends"})
+                    bridge.send("VKWebAppGetAuthToken", {"app_id": Constants.VK_APP_ID, "scope": "friends"})
                         .then(data => {
                             this.getFriends(data.access_token).then(data => {
                                 this.setState({
@@ -42,7 +43,7 @@ class Friends extends React.Component {
                         fields: "id, photo_50",
                         order: "name",
                         access_token: access_token,
-                        v: "5.122",
+                        v: Constants.VK_API_VERSION,
                     }
                 });
     }
