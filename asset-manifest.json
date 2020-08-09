@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.js": "/intown/static/js/main.f8a6cbcd.chunk.js",
-    "main.js.map": "/intown/static/js/main.f8a6cbcd.chunk.js.map",
+    "main.js": "/intown/static/js/main.c19e1813.chunk.js",
+    "main.js.map": "/intown/static/js/main.c19e1813.chunk.js.map",
     "runtime-main.js": "/intown/static/js/runtime-main.da77f048.js",
     "runtime-main.js.map": "/intown/static/js/runtime-main.da77f048.js.map",
     "static/css/2.1e562f28.chunk.css": "/intown/static/css/2.1e562f28.chunk.css",
     "static/js/2.4a8f0889.chunk.js": "/intown/static/js/2.4a8f0889.chunk.js",
     "static/js/2.4a8f0889.chunk.js.map": "/intown/static/js/2.4a8f0889.chunk.js.map",
     "index.html": "/intown/index.html",
-    "precache-manifest.5388b34f9ddd26445993595dc8cfb727.js": "/intown/precache-manifest.5388b34f9ddd26445993595dc8cfb727.js",
+    "precache-manifest.a06cdeda68fb9946927cd7692824689b.js": "/intown/precache-manifest.a06cdeda68fb9946927cd7692824689b.js",
     "service-worker.js": "/intown/service-worker.js",
     "static/css/2.1e562f28.chunk.css.map": "/intown/static/css/2.1e562f28.chunk.css.map",
     "static/js/2.4a8f0889.chunk.js.LICENSE.txt": "/intown/static/js/2.4a8f0889.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.da77f048.js",
     "static/css/2.1e562f28.chunk.css",
     "static/js/2.4a8f0889.chunk.js",
-    "static/js/main.f8a6cbcd.chunk.js"
+    "static/js/main.c19e1813.chunk.js"
   ]
 }
