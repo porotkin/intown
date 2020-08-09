@@ -4,7 +4,7 @@ import '@vkontakte/vkui/dist/vkui.css';
 import SubscribeButton from "./SubscribeButton";
 import bridge from '@vkontakte/vk-bridge';
 import SimpleCell from "@vkontakte/vkui/dist/components/SimpleCell/SimpleCell";
-import Constants from "../constants";
+import ApiConnector from "../services/apiConnector";
 
 class Friends extends React.Component {
     constructor (props) {
@@ -19,13 +19,7 @@ class Friends extends React.Component {
             this.setState({
                 user_id: data.id
             });
-            fetch(Constants.SERVER_API_ADDRESS + "user/" + this.state.user_id, {
-                mode: "cors",
-                method: "GET",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            }).then((response) => {
+            ApiConnector.getSubscribers(this.state.user_id).then((response) => {
                 response.json().then((data) => {
                     this.setState({
                         subscribers: data.subs

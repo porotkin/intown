@@ -12,10 +12,9 @@ class Main extends React.Component {
 
         this.state = {
             activeStory: 'Subs',
-            friends: null,
         };
-        this.onStoryChange = this.onStoryChange.bind(this);
 
+        this.onStoryChange = this.onStoryChange.bind(this);
     }
 
     onStoryChange (e) {
@@ -23,7 +22,6 @@ class Main extends React.Component {
     }
 
     render () {
-
         return (
             <Epic activeStory={this.state.activeStory} tabbar={
                 <Tabbar>
@@ -39,7 +37,6 @@ class Main extends React.Component {
                         data-story="Geo"
                         text="Геолокация"
                     ><Icon28LocationOutline fill='#228B22'/></TabbarItem>
-
                 </Tabbar>
             }>
                 <View id="Subs" activePanel="Subs">
@@ -51,7 +48,7 @@ class Main extends React.Component {
                 <View id="Geo" activePanel="Geo" >
                     <Panel id="Geo">
                         <PanelHeader separator={false}>Геолокация</PanelHeader>
-                        <Gmap />
+                            <Gmap />
                     </Panel>
                 </View>
             </Epic>
