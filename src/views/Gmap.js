@@ -33,13 +33,15 @@ class Gmap extends React.Component {
 
     sendGeoToServer = async () => {
         await this.getGeo().then(data => {
-            ApiConnector.addUserLocation(this.state.user_id, data.lat, data.long);
-            this.setState({
-                geoLocation: {
-                    lat: data.lat,
-                    lng: data.long,
-                }
-            });
+            if (data.lat !== 0 && data.long !== 0) {
+                ApiConnector.addUserLocation(this.state.user_id, data.lat, data.long);
+                this.setState({
+                    geoLocation: {
+                        lat: data.lat,
+                        lng: data.long,
+                    }
+                });
+            }
         });
     }
 

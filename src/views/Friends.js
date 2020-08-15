@@ -6,14 +6,30 @@ import bridge from '@vkontakte/vk-bridge';
 import SimpleCell from "@vkontakte/vkui/dist/components/SimpleCell/SimpleCell";
 import ApiConnector from "../services/apiConnector";
 import Constants from "../constants";
+import Search from "@vkontakte/vkui/dist/components/Search/Search";
 
 class Friends extends React.Component {
+    searchChange = (e) => {
+        this.setState({
+            search: e.target.value
+        });
+    };
+
+    get friends() {
+        const search = this.state.search.toUpperCase();
+        return this.state.search !== ''
+            ? this.state.friends.filter((friend) => friend.first_name.toUpperCase().indexOf(search) > -1
+            || friend.last_name.toUpperCase().indexOf(search) > -1)
+            : this.state.friends;
+    }
+
     constructor (props) {
         super(props);
         this.state = {
           friends: null,
           user_id: null,
           subscribers: null,
+          search: '',
         };
         bridge.send("VKWebAppGetUserInfo", {}).then((user_data) => {
             ApiConnector.getSubscribers(user_data.id).then((response) => {
@@ -52,7 +68,8 @@ class Friends extends React.Component {
         return (
             <Group>
                 <Header mode="secondary" popout={this.state.popout}>Список друзей</Header>
-                {this.state.friends ? this.state.friends.map((friend) => {
+                <Search value={this.state.search} onChange={this.searchChange} after={null}/>
+                {this.state.friends ? this.friends.map((friend) => {
                     return <SimpleCell
                         key={friend.id}
                         before={<Avatar size={48} src={friend.photo_50}/>}
@@ -61,7 +78,6 @@ class Friends extends React.Component {
                             friend_id={friend.id}
                             subscribed={this.state.subscribers ? this.state.subscribers.includes(friend.id) : false}
                         />}
-                        description={friend.id}
                     >{friend.first_name + ' ' + friend.last_name}</SimpleCell>
                 }) : <Spinner size="regular" style={{ marginTop: 20 }}/> }
             </Group>
