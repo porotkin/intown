@@ -4,7 +4,7 @@ import '@vkontakte/vkui/dist/vkui.css';
 import Icon28PlayRectangleStackOutline from '@vkontakte/icons/dist/28/play_rectangle_stack_outline';
 import Icon28LocationOutline from '@vkontakte/icons/dist/28/location_outline';
 import Friends from "./Friends";
-import Gmap from "./Gmap";
+import MapComponent from "./MapComponent";
 
 class Main extends React.Component {
     constructor (props) {
@@ -48,7 +48,7 @@ class Main extends React.Component {
                 <View id="Geo" activePanel="Geo" >
                     <Panel id="Geo">
                         <PanelHeader separator={false}>Геолокация</PanelHeader>
-                            <Gmap />
+                            <MapComponent />
                     </Panel>
                 </View>
             </Epic>

@@ -3,12 +3,11 @@ import '@vkontakte/vkui/dist/vkui.css';
 import React from 'react';
 import GeoButton from "./GeoButton";
 import bridge from "@vkontakte/vk-bridge";
-import GoogleMapReact from 'google-map-react';
-import Marker from '../panels/Marker'
 import ApiConnector from "../services/apiConnector";
 import Constants from "../constants";
+import {YMaps, Map, Clusterer, Placemark} from "react-yandex-maps";
 
-class Gmap extends React.Component {
+class MapComponent extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
@@ -33,7 +32,7 @@ class Gmap extends React.Component {
 
     sendGeoToServer = async () => {
         await this.getGeo().then(data => {
-            if (data.lat !== 0 && data.long !== 0) {
+            if (data && data.lat !== 0 && data.long !== 0) {
                 ApiConnector.addUserLocation(this.state.user_id, data.lat, data.long);
                 this.setState({
                     geoLocation: {
@@ -71,8 +70,7 @@ class Gmap extends React.Component {
                                                     id: location.id,
                                                     name: user.first_name + ' ' + user.last_name,
                                                     date: location.date,
-                                                    lat: location.lat,
-                                                    lng: location.lng,
+                                                    location: [location.lat, location.long],
                                                 }
                                                 subscribers.push(userLocation)
                                             }
@@ -93,22 +91,39 @@ class Gmap extends React.Component {
         return (this.state.subscribers)
         ? (
             <Group style={{
-                height: '65vh', width: '95%',
+                height: '100%', width: '100%',
                 marginLeft: "auto",
                 marginRight: "auto"
             }}>
-            <GoogleMapReact
-                bootstrapURLKeys={{ key: 'AIzaSyCA-CWX9xnTnxGmzIxkH_WIsGUrdeRI444' }}
-                center={this.state.geoLocation ? this.state.geoLocation : this.props.center}
-                zoom={this.props.zoom}>
-                {this.state.geoLocation ? <Marker lat={this.state.geoLocation.lat} lng={this.state.geoLocation.lng} name={'Вы'} date={new Date().toISOString().split("T")[0]}/>:''}
-                {this.state.subscribers.map((friend) => {
-                    return <Marker key={friend.id} lat={friend.lat} lng={friend.lng} name={friend.name} date={friend.date}/>})}
-            </GoogleMapReact>
+            <YMaps>
+                <Map
+                    state={{
+                        center: [55.75, 37.57],
+                        zoom: 9,
+                        controls: ['zoomControl'],
+                    }}
+                    modules={['control.ZoomControl']}
+                    width={'100%'}
+                    height={'70vh'}
+                >
+                    <Clusterer
+                        options={{
+                            preset: 'islands#invertedVioletClusterIcons',
+                            groupByCoordinates: true,
+                        }}
+                    >
+                        {this.state.subscribers.map((subscriber) => (
+                            <Placemark key={subscriber.id}
+                                       geometry={subscriber.location}
+                            />
+                        ))}
+                    </Clusterer>
+                </Map>
+            </YMaps>
             <GeoButton onClick={this.sendGeoToServer}/>
             </Group>
         )
         : (<ScreenSpinner size="large" />)
     }
 }
-export default Gmap
+export default MapComponent

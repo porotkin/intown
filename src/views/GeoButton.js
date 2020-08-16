@@ -3,10 +3,6 @@ import {Div, Button} from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 
 class GeoButton extends React.Component {
-    constructor (props) {
-        super(props);
-    }
-
     render () {
         return (
                 <Div style={{textAlign: 'center', marginTop: '3%'}}>
