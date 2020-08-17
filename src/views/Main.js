@@ -11,6 +11,7 @@ import Group from "@vkontakte/vkui/dist/components/Group/Group";
 import Header from "@vkontakte/vkui/dist/components/Header/Header";
 import bridge from "@vkontakte/vk-bridge";
 import Constants from "../constants";
+import './AnimationForBackground.css'
 
 class Main extends React.Component {
     constructor (props) {
@@ -48,23 +49,20 @@ class Main extends React.Component {
                         <PanelHeader>Gallery</PanelHeader>
                         <Group header={<Header mode="secondary">Sticks right</Header>}>
                             <Gallery
-                                align={"center"}
                                 slideWidth={'100%'}
-                                height={'100vh'}
+                                style={{ height: "70vh" ,marginTop:"5%"}}
                             >
-                                <div style={{
-                                              height: '100vh',
-                                              width: '100vw',
-                                              align: 'center',
-                                              backgroundColor: 'var(--destructive)',
-                                           }}>
-                                    <Button mode={"primary"} onClick={this.onGetAccessTokenClick}>Дать доступ к друзьям</Button>
+                                <div style={{}}>
+                                    <img src={"https://srv4.imgonline.com.ua/result_img/imgonline-com-ua-Transparent-backgr-BYn6IGUCKsj.png"} className={"block"}></img>
+                                    <Button mode={"primary"} style={{position:'absolute',zIndex:1 , marginTop : "60vh" ,marginLeft:"20vw"}} onClick={this.onGetAccessTokenClick}>Дать доступ к друзьям</Button>
+                                    <h1 style={{position:'absolute',zIndex:1 , textAlign:'center' , width:"90%",marginLeft:'5vw' ,}}>Доступ к твоим друзьям нужен для того , чтобы ты имел доступ к разделу "Подписки".Нажми кнопку снизу</h1>
                                 </div>
                                 <div style={{ backgroundColor: 'var(--button_commerce_background)' }}>
-                                    <Button mode={"primary"} onClick={this.onGetGeoLocationClick}>Дать доступ к геолокации</Button>
+                                    <Button mode={"primary"} style={{marginTop : "60vh" ,marginLeft:"20vw"}} onClick={this.onGetGeoLocationClick}>Дать доступ к геолокации</Button>
                                 </div>
                                 <div style={{ backgroundColor: 'var(--accent)' }}>
-                                    <Button mode={"primary"} onClick={this.onProceedToAppClick}>Перейти к приложению</Button>
+                                    <img src={"https://srv4.imgonline.com.ua/result_img/imgonline-com-ua-Transparent-backgr-BYn6IGUCKsj.png"} className={"block"}></img>
+                                    <Button mode={"primary"} style={{marginTop : "60vh" ,marginLeft:"20vw"}} onClick={this.onProceedToAppClick}>Перейти к приложению</Button>
                                 </div>
                             </Gallery>
                         </Group>
