@@ -11,6 +11,16 @@ export default class ApiConnector {
         });
     }
 
+    static getUserSubscribers = async (user_id) => {
+        return await fetch(Constants.SERVER_API_ADDRESS + "subscribers/" + user_id, {
+            mode: "cors",
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+    }
+
     static addSubscriber = async (user_id, friend_id) => {
         return await fetch(Constants.SERVER_API_ADDRESS + "user/add", {
             mode: "cors",

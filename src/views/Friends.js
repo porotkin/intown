@@ -30,20 +30,27 @@ class Friends extends React.Component {
           user_id: null,
           subscribers: null,
           search: '',
+          userSubscribers: null,
         };
         bridge.send("VKWebAppGetUserInfo", {}).then((user_data) => {
             ApiConnector.getSubscribers(user_data.id).then((response) => {
                 response.json().then((api) => {
-                    bridge.send("VKWebAppGetAuthToken", {"app_id": Constants.VK_APP_ID, "scope": "friends"})
-                        .then(data => {
-                            this.getFriends(data.access_token).then(data => {
-                                this.setState({
-                                    user_id: user_data.id,
-                                    subscribers: api.subs,
-                                    friends: data.response.items
+                    ApiConnector.getUserSubscribers(user_data.id).then((resp) => {
+                        resp.json().then(userSubs => {
+                            bridge.send("VKWebAppGetAuthToken", {"app_id": Constants.VK_APP_ID, "scope": "friends"})
+                                .then(data => {
+                                    this.getFriends(data.access_token).then(data => {
+                                        this.setState({
+                                            user_id: user_data.id,
+                                            subscribers: api.subs,
+                                            friends: data.response.items,
+                                            userSubscribers: userSubs.subs,
+                                        });
+                                    });
                                 });
-                            });
                         });
+                    });
+
                 });
             }, (reject) => {
                 console.log(reject)
@@ -78,6 +85,7 @@ class Friends extends React.Component {
                             friend_id={friend.id}
                             subscribed={this.state.subscribers ? this.state.subscribers.includes(friend.id) : false}
                         />}
+                        description={(this.state.userSubscribers && this.state.userSubscribers.indexOf(friend.id) > -1) ? "Ваш подписчик" : ""}
                     >{friend.first_name + ' ' + friend.last_name}</SimpleCell>
                 }) : <Spinner size="regular" style={{ marginTop: 20 }}/> }
             </Group>

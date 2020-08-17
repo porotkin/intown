@@ -5,6 +5,12 @@ import Icon28PlayRectangleStackOutline from '@vkontakte/icons/dist/28/play_recta
 import Icon28LocationOutline from '@vkontakte/icons/dist/28/location_outline';
 import Friends from "./Friends";
 import MapComponent from "./MapComponent";
+import Button from "@vkontakte/vkui/dist/components/Button/Button";
+import Gallery from "@vkontakte/vkui/dist/components/Gallery/Gallery";
+import Group from "@vkontakte/vkui/dist/components/Group/Group";
+import Header from "@vkontakte/vkui/dist/components/Header/Header";
+import bridge from "@vkontakte/vk-bridge";
+import Constants from "../constants";
 
 class Main extends React.Component {
     constructor (props) {
@@ -12,6 +18,8 @@ class Main extends React.Component {
 
         this.state = {
             activeStory: 'Subs',
+            slideIndex: 0,
+            onboarding: true,
         };
 
         this.onStoryChange = this.onStoryChange.bind(this);
@@ -21,9 +29,50 @@ class Main extends React.Component {
         this.setState({ activeStory: e.currentTarget.dataset.story })
     }
 
+    onProceedToAppClick = () => {
+        this.setState({onboarding: false});
+    }
+
+    onGetAccessTokenClick = () => {
+        bridge.send("VKWebAppGetAuthToken", {"app_id": Constants.VK_APP_ID, "scope": "friends"});
+    }
+
+    onGetGeoLocationClick = () => {
+        bridge.send("VKWebAppGetAuthToken");
+    }
+
     render () {
-        return (
-            <Epic activeStory={this.state.activeStory} tabbar={
+        return (this.state.onboarding)
+            ? (<View activePanel="gallery">
+                    <Panel id="gallery">
+                        <PanelHeader>Gallery</PanelHeader>
+                        <Group header={<Header mode="secondary">Sticks right</Header>}>
+                            <Gallery
+                                align={"center"}
+                                slideWidth={'100%'}
+                                height={'100vh'}
+                            >
+                                <div style={{
+                                              height: '100vh',
+                                              width: '100vw',
+                                              align: 'center',
+                                              backgroundColor: 'var(--destructive)',
+                                           }}>
+                                    <Button mode={"primary"} onClick={this.onGetAccessTokenClick}>Дать доступ к друзьям</Button>
+                                </div>
+                                <div style={{ backgroundColor: 'var(--button_commerce_background)' }}>
+                                    <Button mode={"primary"} onClick={this.onGetGeoLocationClick}>Дать доступ к геолокации</Button>
+                                </div>
+                                <div style={{ backgroundColor: 'var(--accent)' }}>
+                                    <Button mode={"primary"} onClick={this.onProceedToAppClick}>Перейти к приложению</Button>
+                                </div>
+                            </Gallery>
+                        </Group>
+                    </Panel>
+                </View>
+              )
+            :
+            (<Epic activeStory={this.state.activeStory} tabbar={
                 <Tabbar>
                     <TabbarItem
                         onClick={this.onStoryChange}
