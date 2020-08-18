@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "9e24622cb3537cf1f445b5f91cc4d0fe",
+    "revision": "a5570140a1cef8e900e153cf48086b48",
     "url": "/intown/index.html"
   },
   {
-    "revision": "7ecea7be30b094bc95ff",
+    "revision": "e0b29ceb3a92e8b01fd8",
     "url": "/intown/static/css/2.1e562f28.chunk.css"
   },
   {
-    "revision": "6e1c9c62f52a7aba5491",
-    "url": "/intown/static/css/main.33fea944.chunk.css"
+    "revision": "3807840bb904016a92cd",
+    "url": "/intown/static/css/main.8c474f5c.chunk.css"
   },
   {
-    "revision": "7ecea7be30b094bc95ff",
-    "url": "/intown/static/js/2.e30707c2.chunk.js"
+    "revision": "e0b29ceb3a92e8b01fd8",
+    "url": "/intown/static/js/2.fc3e50fb.chunk.js"
   },
   {
     "revision": "c3e0fd4dfd1cc3858a8f07ed5cf951b5",
-    "url": "/intown/static/js/2.e30707c2.chunk.js.LICENSE.txt"
+    "url": "/intown/static/js/2.fc3e50fb.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "6e1c9c62f52a7aba5491",
-    "url": "/intown/static/js/main.fbf4dfeb.chunk.js"
+    "revision": "3807840bb904016a92cd",
+    "url": "/intown/static/js/main.26c04782.chunk.js"
   },
   {
     "revision": "be167666dc34dd500b7e",
