@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/intown/static/css/main.9fe37d07.chunk.css",
-    "main.js": "/intown/static/js/main.174aff14.chunk.js",
-    "main.js.map": "/intown/static/js/main.174aff14.chunk.js.map",
+    "main.js": "/intown/static/js/main.b2481ea8.chunk.js",
+    "main.js.map": "/intown/static/js/main.b2481ea8.chunk.js.map",
     "runtime-main.js": "/intown/static/js/runtime-main.da77f048.js",
     "runtime-main.js.map": "/intown/static/js/runtime-main.da77f048.js.map",
     "static/css/2.1e562f28.chunk.css": "/intown/static/css/2.1e562f28.chunk.css",
     "static/js/2.fc3e50fb.chunk.js": "/intown/static/js/2.fc3e50fb.chunk.js",
     "static/js/2.fc3e50fb.chunk.js.map": "/intown/static/js/2.fc3e50fb.chunk.js.map",
     "index.html": "/intown/index.html",
-    "precache-manifest.bfc0df61cfa6f5b9842d663a6404b76f.js": "/intown/precache-manifest.bfc0df61cfa6f5b9842d663a6404b76f.js",
+    "precache-manifest.5cd28ef2c0604ce6c0158b46875d6651.js": "/intown/precache-manifest.5cd28ef2c0604ce6c0158b46875d6651.js",
     "service-worker.js": "/intown/service-worker.js",
     "static/css/2.1e562f28.chunk.css.map": "/intown/static/css/2.1e562f28.chunk.css.map",
     "static/css/main.9fe37d07.chunk.css.map": "/intown/static/css/main.9fe37d07.chunk.css.map",
@@ -21,6 +21,6 @@
     "static/css/2.1e562f28.chunk.css",
     "static/js/2.fc3e50fb.chunk.js",
     "static/css/main.9fe37d07.chunk.css",
-    "static/js/main.174aff14.chunk.js"
+    "static/js/main.b2481ea8.chunk.js"
   ]
 }
