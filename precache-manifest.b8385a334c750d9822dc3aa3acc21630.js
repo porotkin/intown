@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "66b0c64106558353f555587ff3d63151",
+    "revision": "03084ea95461ab1fc87fa057e1bbbd35",
     "url": "/intown/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/intown/static/css/2.1e562f28.chunk.css"
   },
   {
-    "revision": "b29862c6b7f8edcb7465",
+    "revision": "cd5637a8158a68634edf",
     "url": "/intown/static/css/main.33fea944.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/intown/static/js/2.fc3e50fb.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "b29862c6b7f8edcb7465",
-    "url": "/intown/static/js/main.a677afdf.chunk.js"
+    "revision": "cd5637a8158a68634edf",
+    "url": "/intown/static/js/main.10a303ff.chunk.js"
   },
   {
     "revision": "be167666dc34dd500b7e",
