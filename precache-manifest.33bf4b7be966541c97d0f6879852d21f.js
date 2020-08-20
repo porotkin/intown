@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5d0f94e4fb0b9ea2b22a6da20469895e",
+    "revision": "6a8fd39a8a71b48d789a9d30f3aedc75",
     "url": "/intown/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/intown/static/css/2.1e562f28.chunk.css"
   },
   {
-    "revision": "52b3a16427ca12199373",
-    "url": "/intown/static/css/main.9fe37d07.chunk.css"
+    "revision": "c8c9b9fc25604c9522a6",
+    "url": "/intown/static/css/main.20cf4cfb.chunk.css"
   },
   {
     "revision": "e0b29ceb3a92e8b01fd8",
@@ -20,15 +20,23 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/intown/static/js/2.fc3e50fb.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "52b3a16427ca12199373",
-    "url": "/intown/static/js/main.b2481ea8.chunk.js"
+    "revision": "c8c9b9fc25604c9522a6",
+    "url": "/intown/static/js/main.fcd43b36.chunk.js"
   },
   {
     "revision": "be167666dc34dd500b7e",
     "url": "/intown/static/js/runtime-main.da77f048.js"
   },
   {
+    "revision": "18582a1f6e00d274202408096fcd8d7d",
+    "url": "/intown/static/media/geolocation_onboarding_background.18582a1f.svg"
+  },
+  {
     "revision": "07c7591fc85f3c5eb4f3db1362dd4edb",
     "url": "/intown/static/media/logo.07c7591f.svg"
+  },
+  {
+    "revision": "db08d2972cbd004454134532feacd6d1",
+    "url": "/intown/static/media/subscriptions_onboarding_background.db08d297.svg"
   }
 ]);
